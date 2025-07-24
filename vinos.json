@@ -3,7 +3,7 @@
     "nombre": "Vino Tinto Reserva",
     "precio": 80,
     "categoria": "Tinto",
-    "img": "img/tinto.jpg",
+    "imagenes": "imagenes/1 (1).jpeg",
     "estrellas": 4,
     "descripcion": "Un vino intenso y elegante, con notas a frutos rojos y roble envejecido.",
     "resena": "⭐⭐⭐⭐ - “Perfecto para cenas especiales, sabor profundo y equilibrado.”"
@@ -12,7 +12,7 @@
     "nombre": "Vino Blanco Chardonnay",
     "precio": 65,
     "categoria": "Blanco",
-    "img": "img/blanco.jpg",
+    "imagenes": "imagenes/1 (2).jpeg",
     "estrellas": 5,
     "descripcion": "Refrescante y afrutado, ideal para mariscos y comidas ligeras.",
     "resena": "⭐⭐⭐⭐⭐ - “El mejor Chardonnay que he probado, suave y refrescante.”"
@@ -21,7 +21,7 @@
     "nombre": "Vino Rosado Dulce",
     "precio": 50,
     "categoria": "Rosado",
-    "img": "img/rosado.jpg",
+    "imagenes": "imagenes/2 (3).jpeg",
     "estrellas": 3,
     "descripcion": "Dulce y ligero, perfecto para postres o aperitivos.",
     "resena": "⭐⭐⭐ - “Bueno para ocasiones informales, tiene un toque dulce agradable.”"
@@ -30,7 +30,7 @@
     "nombre": "Vino Espumante Brut",
     "precio": 120,
     "categoria": "Espumante",
-    "img": "img/espumante.jpg",
+    "imagenes": "imagenes/e2 (6).jpeg",
     "estrellas": 5,
     "descripcion": "Brillante y burbujeante, ideal para celebraciones y brindis.",
     "resena": "⭐⭐⭐⭐⭐ - “Excelente para celebraciones, burbujas finas y sabor exquisito.”"
