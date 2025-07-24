@@ -374,7 +374,7 @@
 
     function agregarAlCarrito(nombre, precio, img, descripcion) {
       let carrito = obtenerCarrito();
-      carrito.push({ nombre, precio, img });
+      carrito.push({ nombre, precio, img, descripcion});
       guardarCarrito(carrito);
       alert(`✅ ${nombre} añadido al carrito!`);
     }
