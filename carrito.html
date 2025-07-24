@@ -143,10 +143,31 @@
   /* TOTAL */
   .cart-total {
     text-align: right;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--vino);
     font-weight: bold;
     margin-top: 25px;
+  }
+
+  /* CUPON */
+  .coupon-box {
+    text-align:center;
+    margin-top:15px;
+  }
+  .coupon-box input {
+    padding:10px; 
+    border-radius:8px; 
+    border:1px solid #ccc;
+    width:60%; max-width:300px;
+  }
+  .coupon-box button {
+    padding:10px 15px;
+    border:none;
+    background:var(--vino);
+    color:white;
+    border-radius:8px;
+    margin-left:5px;
+    cursor:pointer;
   }
 
   /* BOTONES */
@@ -203,34 +224,6 @@
     filter: drop-shadow(0 0 5px gold);
   }
 
-    .follow-text {
-    margin-top: 8px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-    animation: glowText 2s infinite alternate;
-    }
-
-    .follow-text span {
-    background: linear-gradient(90deg, #ff0050, #00f2ea, #ff0050);
-    background-size: 200%;
-    background-clip: text;            
-    -webkit-background-clip: text;    
-    color: transparent;               
-    -webkit-text-fill-color: transparent; 
-    animation: tiktokGradient 3s infinite linear;
-    }
-
-    @keyframes glowText {
-    from { text-shadow: 0 0 5px #ff0050, 0 0 10px #00f2ea; }
-    to   { text-shadow: 0 0 12px #ff0050, 0 0 20px #00f2ea; }
-    }
-
-    @keyframes tiktokGradient {
-    0% { background-position: 0%; }
-    100% { background-position: 200%; }
-    }
-
 </style>
 </head>
 <body>
@@ -251,6 +244,13 @@
     <!-- Items del carrito -->
     <div id="cartContainer"></div>
 
+    <!-- CUPON -->
+    <div class="coupon-box">
+      <input type="text" id="couponCode" placeholder="¿Tienes un cupón?">
+      <button onclick="aplicarCupon()">Aplicar</button>
+      <div id="couponMsg" style="margin-top:8px; font-size:0.9rem; color:#444;"></div>
+    </div>
+
     <!-- Total y botones -->
     <div id="cartTotalContainer"></div>
   </div>
@@ -260,20 +260,18 @@
   </div>
 
   <!-- FOOTER -->
-    <footer>
+  <footer>
     <p>© 2025 Vinos Selectos | Experiencia Premium 🍷</p>
-
-    <div style="margin-top:15px;">
-        <a href="https://www.tiktok.com/@j_manuelstar" target="_blank" title="TikTok">
-        <img src="imagenes/favicon.png" alt="TikTok" style="width:100px;height:100px;margin:0 8px;">
-        </a>
-        <div class="follow-text">Síguenos en <span>TikTok</span> 🎶</div>
-    </div>
-    </footer>
-
+  </footer>
 
   <script>
-    const whatsappNumber = "51901594350";
+    const whatsappNumber = "51986973753";
+    let cuponActivo = null;
+    let descuentoPorcentaje = 0;
+
+    const cuponesDisponibles = {
+      "PERU": 20
+    };
 
     function obtenerCarrito(){ 
       return JSON.parse(localStorage.getItem("carritoVinos") || "[]"); 
@@ -282,7 +280,24 @@
       localStorage.setItem("carritoVinos", JSON.stringify(c)); 
     }
 
-    // Eliminar item
+    function aplicarCupon(){
+      const code = document.getElementById("couponCode").value.trim().toUpperCase();
+      const msg = document.getElementById("couponMsg");
+
+      if(cuponesDisponibles[code] !== undefined){
+        cuponActivo = code;
+        descuentoPorcentaje = cuponesDisponibles[code];
+        msg.textContent = `✅ Cupón aplicado: ${descuentoPorcentaje}% de descuento`;
+        msg.style.color = "green";
+      } else {
+        cuponActivo = null;
+        descuentoPorcentaje = 0;
+        msg.textContent = "❌ Cupón inválido";
+        msg.style.color = "red";
+      }
+      mostrarCarrito();
+    }
+
     function eliminarDelCarrito(index){
       let carrito = obtenerCarrito();
       carrito.splice(index,1);
@@ -290,24 +305,28 @@
       mostrarCarrito();
     }
 
-    // Finalizar compra
-    function finalizarCompra(){
+    function finalizarCompra(subtotal, descuento, totalFinal){
       const carrito = obtenerCarrito();
       if(!carrito.length){ 
         alert("Tu carrito está vacío 😅"); 
         return; 
       }
-      let mensaje = "Hola, quiero comprar estos vinos:\n";
-      let total = 0;
-      carrito.forEach(item=>{
-        mensaje += `• ${item.nombre} - S/. ${item.precio}\n`;
-        total += item.precio;
+
+      let mensaje = "🍷 *Pedido Vinos Selectos*\n\n";
+      carrito.forEach((item, i)=>{
+        mensaje += `${i+1}. *${item.nombre}*\n   ${item.descripcion || ""}\n   Precio: S/. ${item.precio}\n\n`;
       });
-      mensaje += `\nTOTAL: S/. ${total}`;
+
+      mensaje += `📦 Subtotal: S/. ${subtotal.toFixed(2)}\n`;
+      if(descuento > 0){
+        mensaje += `🎟️ Descuento (${descuentoPorcentaje}% - Cupón *${cuponActivo}*): -S/. ${descuento.toFixed(2)}\n`;
+      }
+      mensaje += `💳 *Total a pagar: S/. ${totalFinal.toFixed(2)}*\n\n`;
+      mensaje += `✅ Envíame este mensaje para confirmar tu pedido.`;
+
       window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensaje)}`, "_blank");
     }
 
-    // Mostrar carrito
     function mostrarCarrito(){
       const container = document.getElementById("cartContainer");
       const totalContainer = document.getElementById("cartTotalContainer");
@@ -326,13 +345,14 @@
         return;
       }
 
-      // Contador y promo dinámico
-      let total = 0;
-      carrito.forEach(item=> total += item.precio);
+      // Subtotal
+      let subtotal = 0;
+      carrito.forEach(item=> subtotal += item.precio);
       const cantidad = carrito.length;
-      const faltante = 100 - total; // Promo: envío gratis desde S/100
+      const faltante = 100 - subtotal;
+      const porcentajePromo = Math.min((subtotal/100)*100, 100);
 
-      let promoMsg = (total >= 100) 
+      let promoMsg = (subtotal >= 100) 
         ? "✅ ¡Felicidades! Tienes envío gratis 🎉" 
         : `🚚 Agrega S/. ${faltante} más para envío gratis`;
 
@@ -341,11 +361,8 @@
         <div class="promo-msg">${promoMsg}</div>
         <div class="promo-bar-container"><div class="promo-bar" id="promoBar"></div></div>
       `;
-      // Progreso de promo
-      const porcentaje = Math.min((total/100)*100, 100);
-      setTimeout(()=> promoBar.style.width = porcentaje + "%", 100);
+      setTimeout(()=> promoBar.style.width = porcentajePromo + "%", 100);
 
-      // Listar items
       carrito.forEach((item, index)=>{
         const div = document.createElement("div");
         div.classList.add("cart-item");
@@ -361,17 +378,23 @@
         container.appendChild(div);
       });
 
-      // Total
+      // Descuento
+      let descuento = cuponActivo ? (subtotal * descuentoPorcentaje) / 100 : 0;
+      let totalFinal = subtotal - descuento;
+
       const totalDiv = document.createElement("div");
       totalDiv.classList.add("cart-total");
-      totalDiv.textContent = `Total: S/. ${total}`;
+      totalDiv.innerHTML = `
+        <div>Subtotal: S/. ${subtotal.toFixed(2)}</div>
+        ${descuento > 0 ? `<div style="color:green;">Descuento (${descuentoPorcentaje}%): -S/. ${descuento.toFixed(2)}</div>` : ""}
+        <div style="font-size:1.5rem; margin-top:5px;">Total: <strong>S/. ${totalFinal.toFixed(2)}</strong></div>
+      `;
       totalContainer.appendChild(totalDiv);
 
-      // Botón finalizar
       const btn = document.createElement("button");
       btn.classList.add("btn-finalizar");
       btn.textContent = "✅ Finalizar compra por WhatsApp";
-      btn.onclick = finalizarCompra;
+      btn.onclick = ()=> finalizarCompra(subtotal, descuento, totalFinal);
       totalContainer.appendChild(btn);
     }
 
