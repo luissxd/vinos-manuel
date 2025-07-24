@@ -151,6 +151,23 @@
     cursor:pointer;
   }
 
+  .btn-finalizar, .btn-vaciar {
+    background: var(--vino);
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    margin-top: 15px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(128,0,32,0.3);
+  }
+  .btn-finalizar:hover, .btn-vaciar:hover {
+    background: var(--vino-claro);
+    transform: scale(1.02);
+  }
   .btn-volver {
     display: inline-block;
     text-decoration: none;
@@ -473,6 +490,7 @@
     btn.textContent = "✅ Finalizar compra por WhatsApp";
     btn.onclick = ()=> finalizarCompra(subtotal, descuentoCupon, autoDesc, totalFinal);
     totalContainer.appendChild(btn);
+
 
   }
 
