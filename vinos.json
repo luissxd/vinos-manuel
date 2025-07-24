@@ -1,38 +1,38 @@
 [
   {
-    "nombre": "Vino Tinto Reserva",
-    "precio": 80,
-    "categoria": "Tinto",
-    "imagenes": "imagenes/1 (1).jpeg",
-    "estrellas": 4,
-    "descripcion": "Un vino intenso y elegante, con notas a frutos rojos y roble envejecido.",
-    "resena": "⭐⭐⭐⭐ - “Perfecto para cenas especiales, sabor profundo y equilibrado.”"
-  },
-  {
-    "nombre": "Vino Blanco Chardonnay",
-    "precio": 65,
-    "categoria": "Blanco",
-    "imagenes": "imagenes/1 (2).jpeg",
-    "estrellas": 5,
-    "descripcion": "Refrescante y afrutado, ideal para mariscos y comidas ligeras.",
-    "resena": "⭐⭐⭐⭐⭐ - “El mejor Chardonnay que he probado, suave y refrescante.”"
-  },
-  {
-    "nombre": "Vino Rosado Dulce",
-    "precio": 50,
+    "nombre": "Vino Rosé Reserva Especial",
+    "precio": 18,
     "categoria": "Rosado",
-    "imagenes": "imagenes/2 (3).jpeg",
-    "estrellas": 3,
-    "descripcion": "Dulce y ligero, perfecto para postres o aperitivos.",
-    "resena": "⭐⭐⭐ - “Bueno para ocasiones informales, tiene un toque dulce agradable.”"
+    "img": "imagenes/vino-rose.jpeg",
+    "estrellas": 4,
+    "descripcion": "Un vino rosado refrescante, con notas dulces y suaves ideal para toda ocasión.",
+    "resena": "⭐⭐⭐⭐ - “Perfecto para compartir en reuniones, sabor ligero y agradable.”"
   },
   {
-    "nombre": "Vino Espumante Brut",
-    "precio": 120,
-    "categoria": "Espumante",
-    "imagenes": "imagenes/e2 (6).jpeg",
+    "nombre": "Vino de Durazno",
+    "precio": 21,
+    "categoria": "Frutado",
+    "img": "imagenes/vino-durazno.jpeg",
     "estrellas": 5,
-    "descripcion": "Brillante y burbujeante, ideal para celebraciones y brindis.",
-    "resena": "⭐⭐⭐⭐⭐ - “Excelente para celebraciones, burbujas finas y sabor exquisito.”"
+    "descripcion": "Vino artesanal macerado con durazno, dulce y afrutado, ideal para postres.",
+    "resena": "⭐⭐⭐⭐⭐ - “Un toque de fruta fresca, delicioso para acompañar postres.”"
+  },
+  {
+    "nombre": "Vino de Higo Macerado",
+    "precio": 18,
+    "categoria": "Frutado",
+    "img": "imagenes/vino-higo.jpeg",
+    "estrellas": 4,
+    "descripcion": "Vino dulce con higos macerados, suave y equilibrado.",
+    "resena": "⭐⭐⭐⭐ - “Sabor único y especial para quienes buscan algo diferente.”"
+  },
+  {
+    "nombre": "Vino Borgoña Semi Seco",
+    "precio": 30,
+    "categoria": "Tinto",
+    "img": "imagenes/vino-borgona.jpeg",
+    "estrellas": 5,
+    "descripcion": "Vino Borgoña semi seco, perfecto para celebraciones y reuniones familiares.",
+    "resena": "⭐⭐⭐⭐⭐ - “Un clásico para compartir, calidad y sabor garantizado.”"
   }
 ]
