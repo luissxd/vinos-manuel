@@ -2,35 +2,114 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Vinos Selectos</title>
+  <title>🍷 Vinos Selectos - Tienda Premium</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+    :root {
+      --color-primario: #8B0000;
+      --color-secundario: #f8f4f0;
+      --color-texto: #333;
+      --radius: 15px;
+      --sombra: 0 8px 20px rgba(0,0,0,0.1);
+    }
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      margin: 0; padding: 0;
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: var(--color-secundario);
+      color: var(--color-texto);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
     header {
-      background: #8B0000;
+      background: linear-gradient(135deg, #8B0000, #a52a2a);
       color: #fff;
-      padding: 20px;
+      padding: 40px 20px;
       text-align: center;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+    header p {
+      margin: 10px 0 0;
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    .controls {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      padding: 15px;
+      background: white;
+      box-shadow: var(--sombra);
+      flex-wrap: wrap;
+    }
+    .controls select, .controls input, .controls button {
+      padding: 10px;
+      border-radius: var(--radius);
+      border: 1px solid #ccc;
+      min-width: 150px;
+      font-size: 0.95rem;
+    }
+    .controls button {
+      background: var(--color-primario);
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .controls button:hover {
+      background: #a52a2a;
     }
     .container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      padding: 30px;
     }
     .product {
       background: #fff;
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-align: center;
+      border-radius: var(--radius);
+      box-shadow: var(--sombra);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+    .product:hover {
+      transform: translateY(-5px);
     }
     .product img {
       width: 100%;
-      border-radius: 10px;
+      height: 200px;
+      object-fit: cover;
+    }
+    .product-content {
+      padding: 15px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .product h3 {
+      margin: 0;
+      font-size: 1.3rem;
+      color: var(--color-primario);
+    }
+    .categoria {
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+    .descripcion {
+      margin: 10px 0;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+    .resena {
+      font-style: italic;
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 10px;
     }
     .stars {
       color: gold;
@@ -39,70 +118,238 @@
     .price {
       font-size: 1.2em;
       color: #b22222;
-      margin: 10px 0;
+      font-weight: bold;
+      margin: 5px 0;
     }
-    button {
-      background: #8B0000;
+    .add-cart-btn {
+      background: var(--color-primario);
       color: white;
       border: none;
-      padding: 10px 15px;
+      padding: 12px;
       cursor: pointer;
-      border-radius: 5px;
+      border-radius: var(--radius);
+      transition: 0.3s;
+      margin-top: auto;
     }
-    button:hover {
+    .add-cart-btn:hover {
       background: #a52a2a;
+    }
+
+    /* ✅ Carrito flotante */
+    .cart {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: white;
+      border: 2px solid var(--color-primario);
+      padding: 15px;
+      border-radius: var(--radius);
+      box-shadow: var(--sombra);
+      width: 320px;
+      max-height: 450px;
+      overflow-y: auto;
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from {opacity:0; transform: translateY(10px);}
+      to {opacity:1; transform: translateY(0);}
+    }
+    .cart h3 {
+      margin: 0 0 10px 0;
+      color: var(--color-primario);
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px solid #ddd;
+      font-size: 0.9rem;
+    }
+    .cart-total {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: white;
+      margin-top: auto;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    /* ✅ Responsivo */
+    @media (max-width: 600px) {
+      header h1 { font-size: 2rem; }
+      .controls { flex-direction: column; align-items: center; }
+      .cart { width: 90%; right: 5%; }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>🍷 Vinos Selectos</h1>
-    <p>Elige tu vino favorito y compra directo por WhatsApp</p>
+    <p>La experiencia premium para amantes del vino</p>
   </header>
 
-  <div class="container" id="product-list">
-    <!-- Se cargará dinámicamente -->
+  <!-- ✅ Controles -->
+  <div class="controls">
+    <input type="text" id="search" placeholder="Buscar vino...">
+    <select id="filterCategory">
+      <option value="Todos">Todas las categorías</option>
+    </select>
+    <select id="sortBy">
+      <option value="default">Ordenar por...</option>
+      <option value="precioAsc">Precio: Menor a Mayor</option>
+      <option value="precioDesc">Precio: Mayor a Menor</option>
+      <option value="estrellasDesc">Mejor Calificados</option>
+    </select>
+    <button id="toggleCart">🛒 Carrito (0)</button>
   </div>
 
-  <script>
-    // ✅ Configura tu número de WhatsApp
-    const whatsappNumber = "51999999999"; // Cambia por tu número con código país
+  <!-- ✅ Contenedor de productos -->
+  <div class="container" id="product-list"></div>
 
-    // Función para mostrar estrellas
+  <!-- ✅ Carrito flotante -->
+  <div class="cart" id="cartBox">
+    <h3>🛒 Tu carrito</h3>
+    <div id="cartItems"></div>
+    <div class="cart-total" id="cartTotal">Total: S/. 0</div>
+    <button class="add-cart-btn" onclick="finalizarCompra()">✅ Finalizar compra</button>
+  </div>
+
+  <footer>© 2025 Vinos Selectos. Experiencia premium para tu paladar.</footer>
+
+  <script>
+    const whatsappNumber = "51999999999"; // tu número con código país
+    let productosOriginal = [];
+    let productosFiltrados = [];
+    let carrito = [];
+
     function renderStars(cantidad) {
       return "★".repeat(cantidad) + "☆".repeat(5 - cantidad);
     }
 
-    // Función para crear las tarjetas
     function renderProducts(productos) {
       const container = document.getElementById("product-list");
-      container.innerHTML = ""; // limpia antes
-      productos.forEach((prod, index) => {
+      container.innerHTML = "";
+      if (!productos.length) {
+        container.innerHTML = "<p style='text-align:center;'>😢 No se encontraron vinos con esos filtros</p>";
+        return;
+      }
+      productos.forEach(prod => {
         const div = document.createElement("div");
         div.classList.add("product");
         div.innerHTML = `
           <img src="${prod.img}" alt="${prod.nombre}">
-          <h3>${prod.nombre}</h3>
-          <div class="stars">${renderStars(prod.estrellas)}</div>
-          <div class="price">S/. ${prod.precio}</div>
-          <button onclick="comprar('${prod.nombre}', ${prod.precio})">🛒 Comprar</button>
+          <div class="product-content">
+            <h3>${prod.nombre}</h3>
+            <p class="categoria">${prod.categoria}</p>
+            <div class="stars">${renderStars(prod.estrellas)}</div>
+            <p class="descripcion">${prod.descripcion}</p>
+            <p class="resena">${prod.resena}</p>
+            <div class="price">S/. ${prod.precio}</div>
+            <button class="add-cart-btn" onclick="agregarAlCarrito('${prod.nombre}', ${prod.precio})">➕ Añadir al carrito</button>
+          </div>
         `;
         container.appendChild(div);
       });
     }
 
-    // Cuando le den a comprar
-    function comprar(nombre, precio) {
-      const mensaje = `Hola, estoy interesado en comprar *${nombre}* (S/. ${precio}).`;
+    function agregarAlCarrito(nombre, precio) {
+      carrito.push({ nombre, precio });
+      actualizarCarrito();
+    }
+
+    function actualizarCarrito() {
+      const cartItems = document.getElementById("cartItems");
+      const cartTotal = document.getElementById("cartTotal");
+      const toggleBtn = document.getElementById("toggleCart");
+      cartItems.innerHTML = "";
+      let total = 0;
+      carrito.forEach((item, index) => {
+        total += item.precio;
+        const div = document.createElement("div");
+        div.classList.add("cart-item");
+        div.innerHTML = `
+          ${item.nombre} - S/. ${item.precio}
+          <button onclick="eliminarDelCarrito(${index})">❌</button>
+        `;
+        cartItems.appendChild(div);
+      });
+      cartTotal.textContent = `Total: S/. ${total}`;
+      toggleBtn.textContent = `🛒 Carrito (${carrito.length})`;
+    }
+
+    function eliminarDelCarrito(index) {
+      carrito.splice(index, 1);
+      actualizarCarrito();
+    }
+
+    function finalizarCompra() {
+      if (!carrito.length) {
+        alert("Tu carrito está vacío 😅");
+        return;
+      }
+      let mensaje = "Hola, quiero comprar estos vinos:\n";
+      let total = 0;
+      carrito.forEach(item => {
+        mensaje += `• ${item.nombre} - S/. ${item.precio}\n`;
+        total += item.precio;
+      });
+      mensaje += `\nTOTAL: S/. ${total}`;
       const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensaje)}`;
       window.open(url, "_blank");
     }
 
-    // ✅ Cargar el JSON de vinos
+    document.getElementById("toggleCart").addEventListener("click", () => {
+      const cartBox = document.getElementById("cartBox");
+      cartBox.style.display = cartBox.style.display === "block" ? "none" : "block";
+    });
+
+    function aplicarFiltros() {
+      const searchValue = document.getElementById("search").value.toLowerCase();
+      const selectedCategory = document.getElementById("filterCategory").value;
+      const sortBy = document.getElementById("sortBy").value;
+
+      productosFiltrados = productosOriginal.filter(prod => {
+        const matchesName = prod.nombre.toLowerCase().includes(searchValue);
+        const matchesCategory = (selectedCategory === "Todos" || prod.categoria === selectedCategory);
+        return matchesName && matchesCategory;
+      });
+
+      if (sortBy === "precioAsc") productosFiltrados.sort((a,b)=>a.precio-b.precio);
+      else if (sortBy === "precioDesc") productosFiltrados.sort((a,b)=>b.precio-a.precio);
+      else if (sortBy === "estrellasDesc") productosFiltrados.sort((a,b)=>b.estrellas-a.estrellas);
+
+      renderProducts(productosFiltrados);
+    }
+
+    function initCategories() {
+      const categoriasUnicas = [...new Set(productosOriginal.map(prod => prod.categoria))];
+      const select = document.getElementById("filterCategory");
+      categoriasUnicas.forEach(cat => {
+        const option = document.createElement("option");
+        option.value = cat;
+        option.textContent = cat;
+        select.appendChild(option);
+      });
+    }
+
+    document.getElementById("search").addEventListener("input", aplicarFiltros);
+    document.getElementById("filterCategory").addEventListener("change", aplicarFiltros);
+    document.getElementById("sortBy").addEventListener("change", aplicarFiltros);
+
     fetch("vinos.json")
-      .then(response => response.json())
-      .then(data => renderProducts(data))
-      .catch(error => console.error("Error cargando vinos:", error));
+      .then(res => res.json())
+      .then(data => {
+        productosOriginal = data;
+        productosFiltrados = data;
+        initCategories();
+        renderProducts(data);
+      })
+      .catch(err => console.error("Error cargando vinos:", err));
   </script>
 </body>
 </html>

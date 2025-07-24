@@ -2,19 +2,50 @@
   {
     "nombre": "Vino Tinto Reserva",
     "precio": 80,
-    "img": "https://images.unsplash.com/photo-1603399304283-3b620951cc52",
+    "categoria": "Tinto",
+    "imagenes": "https://images.unsplash.com/photo-1603399304283-3b620951cc52",
     "estrellas": 4
   },
   {
     "nombre": "Vino Blanco Chardonnay",
     "precio": 65,
-    "img": "https://images.unsplash.com/photo-1605180832256-c16e1332ac83",
+    "categoria": "Blanco",
+    "imagenes": "https://images.unsplash.com/photo-1605180832256-c16e1332ac83",
     "estrellas": 5
   },
   {
     "nombre": "Vino Rosado Dulce",
     "precio": 50,
-    "img": "https://images.unsplash.com/photo-1598020125784-8028f0d5565b",
+    "categoria": "Rosado",
+    "imagenes": "https://images.unsplash.com/photo-1598020125784-8028f0d5565b",
+    "estrellas": 3
+  },
+  {
+    "nombre": "Vino Espumante Brut",
+    "precio": 120,
+    "categoria": "Espumante",
+    "imagenes": "https://images.unsplash.com/photo-1607434472257-6d0773f6bff2",
+    "estrellas": 5
+  },
+  {
+    "nombre": "Vino Tinto Reserva",
+    "precio": 80,
+    "categoria": "Tinto",
+    "imagenes": "imagenes/tinto.jpg",
+    "estrellas": 4
+  },
+  {
+    "nombre": "Vino Blanco Chardonnay",
+    "precio": 65,
+    "categoria": "Blanco",
+    "imagenes": "imagenes/blanco.jpg",
+    "estrellas": 5
+  },
+  {
+    "nombre": "Vino Rosado Dulce",
+    "precio": 50,
+    "categoria": "Rosado",
+    "imagenes": "imagenes/rosado.jpg",
     "estrellas": 3
   }
 ]
