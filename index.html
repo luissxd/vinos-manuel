@@ -285,7 +285,7 @@
     <p>© 2025 Vinos Selectos | Experiencia Premium 🍷</p>
     <div style="margin-top:10px;">
       <a href="https://www.tiktok.com/@j_manuelstar" target="_blank" title="TikTok">
-        <img src="imagenes/tk.png" alt="TikTok" style="width:35px;height:35px;margin:0 8px;">
+        <img src="imagenes/tk.png" alt="TikTok" style="width:50px;height:50px;margin:0 8px;">
       </a>
     </div>
   </footer>
@@ -335,7 +335,7 @@
       setTimeout(()=> cartBtn.classList.remove("pulse"), 600);
     }
 
-    function agregarAlCarrito(nombre, precio, img) {
+    function agregarAlCarrito(nombre, precio, img, descripcion) {
       let carrito = obtenerCarrito();
       carrito.push({ nombre, precio, img });
       guardarCarrito(carrito);
@@ -365,7 +365,11 @@
             <p class="descripcion">${prod.descripcion}</p>
             <p class="resena">${prod.resena}</p>
             <div class="price">S/. ${prod.precio}</div>
-            <button class="add-cart-btn" onclick="agregarAlCarrito('${prod.nombre}', ${prod.precio}, '${prod.img}')">➕ Añadir al carrito</button>
+            <button class="add-cart-btn" 
+              onclick="agregarAlCarrito('${prod.nombre}', ${prod.precio}, '${prod.img}', '${prod.descripcion}')">
+              ➕ Añadir al carrito
+            </button>
+            
           </div>
         `;
         container.appendChild(div);
