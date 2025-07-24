@@ -386,7 +386,11 @@
     totalContainer.innerHTML = "";
 
     if(!carrito.length){
-      summary.innerHTML = `<div class="cart-counter">🛍️ Carrito vacío</div>
+      summary.innerHTML = `
+      <div style="text-align:left; margin-bottom:10px;">
+        <a href="index.html" class="btn-volver">⬅️ Seguir comprando</a>
+      </div>
+      <div class="cart-counter">🛍️ Carrito vacío</div>
       <div class="promo-msg">Agrega vinos para aprovechar descuentos</div>
       <div class="promo-bar-container"><div class="promo-bar"></div></div>`;
       container.innerHTML = `<div class="empty">No tienes productos en el carrito</div>`;
