@@ -403,18 +403,17 @@
     const cantidadItems = carrito.reduce((sum, it)=>sum+it.cantidad,0);
 
     // Progreso para meta de 10% descuento
-    // ✅ Calcular cuánto falta para el descuento
     let faltante = metaDescuento10 - subtotal;
     let promoMsg = "";
 
-    // ✅ Mensaje dinámico
+    // Mensaje dinámico
     if (subtotal >= metaDescuento10) {
     promoMsg = "✅ ¡Felicidades! Has desbloqueado 10% de descuento 🎉";
     } else {
     promoMsg = `Agrega S/. ${faltante.toFixed(2)} más para obtener 10% de descuento`;
     }
 
-    // ✅ Actualizar el resumen con NUEVO HTML
+    // Actualizar el resumen con NUEVO HTML
     summary.innerHTML = `
     <div style="text-align:left; margin-bottom:10px;">
         <a href="index.html" class="btn-volver">⬅️ Seguir comprando</a>
@@ -424,15 +423,15 @@
     <div class="promo-bar-container"><div class="promo-bar" id="promoBar"></div></div>
     `;
 
-    // ✅ IMPORTANTE: Obtener la referencia del nuevo promoBar recién creado
+    // IMPORTANTE: Obtener la referencia del nuevo promoBar recién creado
     let promoBarElement = document.getElementById("promoBar");
 
-    // ✅ Calcular porcentaje de progreso
+    // Calcular porcentaje de progreso
     let progreso = Math.min((subtotal / metaDescuento10) * 100, 100);
     // Forzar que al menos se vea algo si hay productos
     if (progreso > 0 && progreso < 5) progreso = 5;
 
-    // ✅ Animar después de 100ms
+    // Animar después de 100ms
     setTimeout(() => {
     promoBarElement.style.width = progreso + "%";
 
