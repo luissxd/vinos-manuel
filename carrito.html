@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>🛒 Carrito - Vinos Selectos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --color-primario: #8B0000;
+      --color-fondo: #f8f4f0;
+      --sombra: 0 4px 15px rgba(0,0,0,0.1);
+      --radius: 12px;
+    }
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin:0;
+      padding:0;
+      background:var(--color-fondo);
+      color:#333;
+    }
+
+    header {
+      background:linear-gradient(135deg,var(--color-primario),#a52a2a);
+      color:#fff;
+      text-align:center;
+      padding:20px;
+    }
+    header h1 { margin:0; font-size:2rem; }
+
+    .cart-container {
+      max-width:700px;
+      margin:30px auto;
+      background:#fff;
+      padding:20px;
+      border-radius:var(--radius);
+      box-shadow:var(--sombra);
+    }
+    .cart-item {
+      display:flex;
+      justify-content:space-between;
+      padding:12px;
+      border-bottom:1px solid #eee;
+      opacity:0;
+      transform:translateY(10px);
+      transition:opacity 0.4s ease, transform 0.4s ease;
+    }
+    .cart-item.show { opacity:1; transform:translateY(0); }
+    .cart-item span { font-size:1rem; }
+    .cart-total {
+      text-align:right;
+      font-size:1.2rem;
+      margin-top:15px;
+      font-weight:bold;
+    }
+    button {
+      background:var(--color-primario);
+      color:white;
+      border:none;
+      padding:10px 15px;
+      cursor:pointer;
+      border-radius:var(--radius);
+      margin-top:15px;
+      transition:background 0.3s;
+    }
+    button:hover { background:#a52a2a; }
+
+    .btn-eliminar {
+      background:#ff4444;
+      margin-left:10px;
+      padding:5px 8px;
+      font-size:0.85rem;
+    }
+    .btn-eliminar:hover { background:#cc0000; }
+
+    .acciones {
+      display:flex;
+      justify-content:space-between;
+      margin-top:20px;
+    }
+    .acciones a {
+      text-decoration:none;
+      color:var(--color-primario);
+      font-weight:bold;
+    }
+
+    /* LOADER */
+    #loader {
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      background:white; display:flex; justify-content:center; align-items:center;
+      z-index:999;
+    }
+    .spinner {
+      width:50px; height:50px; border:5px solid #ccc; border-top:5px solid var(--color-primario);
+      border-radius:50%; animation:spin 1s linear infinite;
+    }
+    @keyframes spin { 0%{transform:rotate(0deg);} 100%{transform:rotate(360deg);} }
+
+    /* TOAST */
+    .toast {
+      position:fixed; top:-50px; left:50%; transform:translateX(-50%);
+      background:var(--color-primario); color:white; padding:12px 20px;
+      border-radius:var(--radius); box-shadow:var(--sombra);
+      opacity:0; transition:all 0.5s ease;
+      font-size:0.95rem;
+    }
+    .toast.show { top:20px; opacity:1; }
+
+    footer {
+      text-align:center;
+      padding:15px;
+      background:white;
+      margin-top:30px;
+      font-size:0.9rem;
+      opacity:0.7;
+    }
+  </style>
+</head>
+<body>
+  <!-- LOADER -->
+  <div id="loader"><div class="spinner"></div></div>
+
+  <!-- HEADER -->
+  <header>
+    <h1>🛒 Tu Carrito</h1>
+  </header>
+
+  <!-- CARRITO -->
+  <div class="cart-container" id="cartContainer"></div>
+
+  <div class="acciones" style="max-width:700px; margin:0 auto; padding:0 20px;">
+    <a href="index.html">⬅️ Seguir comprando</a>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">Actualización carrito</div>
+
+  <footer>© 2025 Vinos Selectos</footer>
+
+  <script>
+    const whatsappNumber = "51999999999";
+
+    // Loader
+    function showLoader(show=true){
+      document.getElementById("loader").style.display = show ? "flex" : "none";
+    }
+
+    // Toast
+    function showToast(msg){
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(()=>toast.classList.remove("show"),2500);
+    }
+
+    // Carrito
+    function obtenerCarrito(){
+      return JSON.parse(localStorage.getItem("carritoVinos") || "[]");
+    }
+    function guardarCarrito(c){
+      localStorage.setItem("carritoVinos", JSON.stringify(c));
+    }
+
+    // Eliminar item
+    function eliminarDelCarrito(index){
+      let carrito = obtenerCarrito();
+      carrito.splice(index,1);
+      guardarCarrito(carrito);
+      mostrarCarrito();
+      showToast("❌ Producto eliminado del carrito");
+    }
+
+    // Finalizar compra
+    function finalizarCompra(){
+      const carrito = obtenerCarrito();
+      if(!carrito.length){
+        showToast("Tu carrito está vacío 😅");
+        return;
+      }
+      let mensaje = "Hola, quiero comprar estos vinos:\n";
+      let total = 0;
+      carrito.forEach(item=>{
+        mensaje += `• ${item.nombre} - S/. ${item.precio}\n`;
+        total += item.precio;
+      });
+      mensaje += `\nTOTAL: S/. ${total}`;
+      window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensaje)}`, "_blank");
+    }
+
+    // Mostrar carrito
+    function mostrarCarrito(){
+      const container = document.getElementById("cartContainer");
+      const carrito = obtenerCarrito();
+      container.innerHTML = "";
+
+      if(!carrito.length){
+        container.innerHTML = `<p style="text-align:center;">🛍️ No tienes productos en el carrito</p>`;
+        return;
+      }
+
+      let total = 0;
+      carrito.forEach((item, index)=>{
+        total += item.precio;
+        const div = document.createElement("div");
+        div.classList.add("cart-item");
+        div.innerHTML = `
+          <span>${item.nombre}</span>
+          <span>S/. ${item.precio} 
+            <button class="btn-eliminar" onclick="eliminarDelCarrito(${index})">❌</button>
+          </span>
+        `;
+        container.appendChild(div);
+
+        // animar la aparición
+        setTimeout(()=>div.classList.add("show"), index * 100);
+      });
+
+      // total y boton finalizar
+      const totalDiv = document.createElement("div");
+      totalDiv.classList.add("cart-total");
+      totalDiv.textContent = `Total: S/. ${total}`;
+      container.appendChild(totalDiv);
+
+      const btnFinalizar = document.createElement("button");
+      btnFinalizar.textContent = "✅ Finalizar Compra por WhatsApp";
+      btnFinalizar.onclick = finalizarCompra;
+      container.appendChild(btnFinalizar);
+    }
+
+    // Inicializar
+    window.addEventListener("load", ()=>{
+      showLoader(true);
+      setTimeout(()=>{ // simular carga
+        mostrarCarrito();
+        showLoader(false);
+      }, 600); // pequeño delay para mostrar loader
+    });
+  </script>
+</body>
+</html>
