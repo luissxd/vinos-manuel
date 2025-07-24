@@ -27,14 +27,8 @@
       text-align: center;
       padding: 30px 15px;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-    header p {
-      font-size: 1.1rem;
-      opacity: 0.9;
-    }
+    header h1 { margin: 0; font-size: 2.5rem; }
+    header p { font-size: 1.1rem; opacity: 0.9; }
 
     /* NAV */
     nav {
@@ -51,9 +45,7 @@
       color: var(--vino);
       transition: 0.3s;
     }
-    nav a:hover {
-      color: var(--dorado);
-    }
+    nav a:hover { color: var(--dorado); }
 
     /* HERO SLIDER */
     .hero-slider {
@@ -70,9 +62,7 @@
       opacity: 0;
       transition: opacity 1.2s ease-in-out;
     }
-    .hero-slider img.active {
-      opacity: 1;
-    }
+    .hero-slider img.active { opacity: 1; }
 
     /* CONTROLS */
     .controls {
@@ -117,45 +107,19 @@
     }
     .product img {
       width: 100%;
-      height: 320px; /* para botellas verticales */
+      height: 320px;
       object-fit: contain;
       background: #fff;
       padding: 10px;
       border-bottom: 2px solid rgba(128,0,32,0.1);
     }
-    .product-content {
-      padding: 15px;
-    }
-    .product h3 {
-      margin: 0;
-      color: var(--vino);
-      font-size: 1.3rem;
-    }
-    .categoria {
-      font-size: 0.9rem;
-      color: var(--dorado);
-      font-weight: bold;
-    }
-    .stars {
-      color: gold;
-      margin: 5px 0;
-    }
-    .descripcion {
-      margin: 8px 0;
-      font-size: 0.95rem;
-    }
-    .resena {
-      font-style: italic;
-      font-size: 0.9rem;
-      color: #555;
-      margin-bottom: 10px;
-    }
-    .price {
-      font-size: 1.3rem;
-      font-weight: bold;
-      color: #a00028;
-      margin-top: 8px;
-    }
+    .product-content { padding: 15px; }
+    .product h3 { margin: 0; color: var(--vino); font-size: 1.3rem; }
+    .categoria { font-size: 0.9rem; color: var(--dorado); font-weight: bold; }
+    .stars { color: gold; margin: 5px 0; }
+    .descripcion { margin: 8px 0; font-size: 0.95rem; }
+    .resena { font-style: italic; font-size: 0.9rem; color: #555; margin-bottom: 10px; }
+    .price { font-size: 1.3rem; font-weight: bold; color: #a00028; margin-top: 8px; }
     .add-cart-btn {
       background: var(--vino);
       color: #fff;
@@ -166,38 +130,83 @@
       cursor: pointer;
       transition: 0.3s;
     }
-    .add-cart-btn:hover {
-      background: var(--vino-claro);
-    }
+    .add-cart-btn:hover { background: var(--vino-claro); }
 
-    /* FLOATING ICONS */
-    .whatsapp-float, .cart-float {
+    /* FLOATING CART BUTTON IMPROVED */
+    .cart-float {
       position: fixed;
+      left: 20px;
       bottom: 20px;
-      width: 65px; height: 65px;
-      display: flex; justify-content: center; align-items: center;
-      font-size: 30px; text-decoration: none; color: white; border-radius: 50%;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      z-index: 999;
+      width: 70px; height: 70px;
+      background: var(--vino);
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: #fff;
+      font-size: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      z-index: 1000;
     }
-    .whatsapp-float { right: 20px; background: #25D366; }
-    .cart-float { left: 20px; background: var(--vino); color: #fff; flex-direction: column; font-size: 28px; }
-    .whatsapp-float:hover, .cart-float:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+    .cart-float:hover { transform: scale(1.1); }
     .cart-info { font-size: 12px; text-align: center; margin-top: 3px; }
     .cart-total { font-size: 10px; font-weight: bold; }
+
+    /* Badge de cantidad */
+    .cart-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: gold;
+      color: #000;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 4px 6px;
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    /* Animación pulse */
+    .cart-float.pulse {
+      animation: pulse 0.6s ease;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    /* WHATSAPP BUTTON */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 65px;
+      height: 65px;
+      background: #25D366;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.3s ease;
+      z-index: 1000;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); }
 
     /* FOOTER */
     footer {
       text-align: center;
       padding: 25px;
-      background: linear-gradient(135deg, #800020, #a52a2a); /* degradado vino */
+      background: linear-gradient(135deg, #800020, #a52a2a);
       color: #fff;
       font-size: 0.95rem;
     }
-    footer img {
-      transition: transform 0.3s, filter 0.3s;
-    }
+    footer img { transition: transform 0.3s, filter 0.3s; }
     footer img:hover {
       transform: scale(1.2);
       filter: drop-shadow(0 0 5px gold);
@@ -217,9 +226,7 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
       transition: bottom 0.6s ease;
     }
-    .promo-popup.show {
-      bottom: 30px;
-    }
+    .promo-popup.show { bottom: 30px; }
   </style>
 </head>
 <body>
@@ -257,15 +264,14 @@
   <!-- PRODUCTOS -->
   <div class="container" id="product-list"></div>
 
-  <!-- FLOATING ICONS -->
+  <!-- CART FLOAT IMPROVED -->
   <div class="cart-float" onclick="window.location='carrito.html'">
-    <img src="imagenes/car.png" alt="Carrito" style="width:28px;height:28px;margin-bottom:3px;">
-    <div class="cart-info">
-      <span id="cartCount">0</span> vinos
-      <div class="cart-total" id="cartTotalFloat">S/.0</div>
-    </div>
+    <div id="cartBadge" class="cart-badge" style="display:none;">0</div>
+    <img src="imagenes/car.png" alt="Carrito" style="width:24px;height:24px;margin-bottom:3px;">
+    <span id="cartText">0 vinos<br>S/.0</span>
   </div>
 
+  <!-- WHATSAPP FLOAT -->
   <a href="https://wa.me/51901594350?text=Hola,%20estoy%20interesado%20en%20sus%20vinos%20🍷"
    target="_blank" class="whatsapp-float" title="Chat WhatsApp">
   <img src="imagenes/wp.png" alt="WhatsApp" style="width:32px;height:32px;">
@@ -274,25 +280,22 @@
   <!-- PROMO POPUP -->
   <div class="promo-popup" id="promoPopup">🎉 Oferta del mes: 20% de descuento en vinos Borgoña 🍷</div>
 
+  <!-- FOOTER -->
   <footer>
-  <p>© 2025 Vinos Selectos | Experiencia Premium 🍷</p>
-  <div style="margin-top:10px;">
-    <a href="https://www.tiktok.com/@j_manuelstar" target="_blank" title="TikTok">
-      <img src="imagenes/tk.png" alt="TikTok" style="width:28px;height:28px;margin:0 8px;">
-    </a>
-    <a href="https://www.facebook.com/juanmanuel.reategui" target="_blank" title="Facebook">
-      <img src="imagenes/fb.png" alt="Facebook" style="width:28px;height:28px;margin:0 8px;">
-    </a>
-  </div>
-</footer>
-
+    <p>© 2025 Vinos Selectos | Experiencia Premium 🍷</p>
+    <div style="margin-top:10px;">
+      <a href="https://www.tiktok.com/@j_manuelstar" target="_blank" title="TikTok">
+        <img src="imagenes/tk.png" alt="TikTok" style="width:35px;height:35px;margin:0 8px;">
+      </a>
+    </div>
+  </footer>
 
   <script>
     const whatsappNumber = "51901594350";
     let productosOriginal = [];
     let productosFiltrados = [];
 
-    // HERO SLIDER
+    // SLIDER
     function sliderInit() {
       const slides = document.querySelectorAll("#heroSlider img");
       let idx = 0;
@@ -306,33 +309,37 @@
     // PROMO POPUP
     function showPromoPopup(){
       const promo = document.getElementById("promoPopup");
-      setTimeout(()=> promo.classList.add("show"), 15000);
-      setTimeout(()=> promo.classList.remove("show"), 25000);
+      promo.classList.remove("show");
+      setTimeout(()=> promo.classList.add("show"), 1000);
+      setTimeout(()=> promo.classList.remove("show"), 10000);
     }
 
-    // Carrito localStorage
+    // Carrito
     function obtenerCarrito() { return JSON.parse(localStorage.getItem("carritoVinos") || "[]"); }
     function guardarCarrito(c) { localStorage.setItem("carritoVinos", JSON.stringify(c)); actualizarCarritoFlotante(); }
 
     function actualizarCarritoFlotante() {
       const carrito = obtenerCarrito();
       const count = carrito.length;
-      let total = carrito.reduce((sum, item)=>sum+item.precio,0);
-      document.getElementById("cartCount").textContent = count;
-      document.getElementById("cartTotalFloat").textContent = `S/.${total}`;
+      const total = carrito.reduce((sum, item) => sum + item.precio, 0);
+      document.getElementById("cartText").innerHTML = `${count} vinos<br>S/.${total}`;
+
+      // Badge
+      const badge = document.getElementById("cartBadge");
+      badge.textContent = count;
+      badge.style.display = count > 0 ? "block" : "none";
+
+      // Animación pulse cuando cambia
+      const cartBtn = document.querySelector(".cart-float");
+      cartBtn.classList.add("pulse");
+      setTimeout(()=> cartBtn.classList.remove("pulse"), 600);
     }
 
-    function agregarAlCarrito(nombre, precio) {
+    function agregarAlCarrito(nombre, precio, img) {
       let carrito = obtenerCarrito();
-      carrito.push({ nombre, precio });
+      carrito.push({ nombre, precio, img });
       guardarCarrito(carrito);
       alert(`✅ ${nombre} añadido al carrito!`);
-    }
-
-    function animateProducts() {
-      document.querySelectorAll(".product").forEach((p, i) => {
-        setTimeout(()=>p.classList.add("show"), i*100);
-      });
     }
 
     function renderStars(cantidad) {
@@ -358,12 +365,11 @@
             <p class="descripcion">${prod.descripcion}</p>
             <p class="resena">${prod.resena}</p>
             <div class="price">S/. ${prod.precio}</div>
-            <button class="add-cart-btn" onclick="agregarAlCarrito('${prod.nombre}', ${prod.precio})">➕ Añadir al carrito</button>
+            <button class="add-cart-btn" onclick="agregarAlCarrito('${prod.nombre}', ${prod.precio}, '${prod.img}')">➕ Añadir al carrito</button>
           </div>
         `;
         container.appendChild(div);
       });
-      animateProducts();
     }
 
     function aplicarFiltros() {
