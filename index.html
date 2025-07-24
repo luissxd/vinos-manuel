@@ -212,6 +212,36 @@
       filter: drop-shadow(0 0 5px gold);
     }
 
+  .follow-text {
+    margin-top: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    animation: glowText 2s infinite alternate;
+  }
+
+  .follow-text span {
+    background: linear-gradient(90deg, #ff0050, #00f2ea, #ff0050);
+    background-size: 200%;
+    background-clip: text;            
+    -webkit-background-clip: text;    
+    color: transparent;               
+    -webkit-text-fill-color: transparent; 
+    animation: tiktokGradient 3s infinite linear;
+  }
+
+  @keyframes glowText {
+    from { text-shadow: 0 0 5px #ff0050, 0 0 10px #00f2ea; }
+    to   { text-shadow: 0 0 12px #ff0050, 0 0 20px #00f2ea; }
+  }
+
+  @keyframes tiktokGradient {
+    0% { background-position: 0%; }
+    100% { background-position: 200%; }
+  }
+
+
+
     /* PROMO POPUP */
     .promo-popup {
       position: fixed;
@@ -283,12 +313,15 @@
   <!-- FOOTER -->
   <footer>
     <p>© 2025 Vinos Selectos | Experiencia Premium 🍷</p>
-    <div style="margin-top:10px;">
+
+    <div style="margin-top:15px;">
       <a href="https://www.tiktok.com/@j_manuelstar" target="_blank" title="TikTok">
-        <img src="imagenes/tk.png" alt="TikTok" style="width:50px;height:50px;margin:0 8px;">
+        <img src="imagenes/tk.png" alt="TikTok" style="width:100px;height:100px;margin:0 8px;">
       </a>
+      <div class="follow-text">Síguenos en <span>TikTok</span> 🎶</div>
     </div>
   </footer>
+
 
   <script>
     const whatsappNumber = "51901594350";
