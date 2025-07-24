@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Vinos Selectos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0; padding: 0;
+    }
+    header {
+      background: #8B0000;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .product {
+      background: #fff;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .product img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .stars {
+      color: gold;
+      margin: 5px 0;
+    }
+    .price {
+      font-size: 1.2em;
+      color: #b22222;
+      margin: 10px 0;
+    }
+    button {
+      background: #8B0000;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background: #a52a2a;
+    }
+    .comment-box {
+      margin-top: 10px;
+    }
+    textarea {
+      width: 100%;
+      border-radius: 5px;
+      padding: 5px;
+      resize: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🍷 Vinos Selectos</h1>
+    <p>Elige tu vino favorito y compra directo por WhatsApp</p>
+  </header>
+
+  <div class="container" id="product-list">
+    <!-- Productos generados por JS -->
+  </div>
+
+  <script>
+    // ✅ Configura tu número de WhatsApp
+    const whatsappNumber = "51999999999"; // Cambia por tu número con código país sin +
+
+    // ✅ Lista de vinos
+    const productos = [
+      {
+        nombre: "Vino Tinto Reserva",
+        precio: 80,
+        img: "https://images.unsplash.com/photo-1603399304283-3b620951cc52",
+        estrellas: 4
+      },
+      {
+        nombre: "Vino Blanco Chardonnay",
+        precio: 65,
+        img: "https://images.unsplash.com/photo-1605180832256-c16e1332ac83",
+        estrellas: 5
+      },
+      {
+        nombre: "Vino Rosado Dulce",
+        precio: 50,
+        img: "https://images.unsplash.com/photo-1598020125784-8028f0d5565b",
+        estrellas: 3
+      }
+    ];
+
+    function renderStars(cantidad) {
+      return "★".repeat(cantidad) + "☆".repeat(5 - cantidad);
+    }
+
+    function renderProducts() {
+      const container = document.getElementById("product-list");
+      productos.forEach((prod, index) => {
+        const div = document.createElement("div");
+        div.classList.add("product");
+        div.innerHTML = `
+          <img src="${prod.img}" alt="${prod.nombre}">
+          <h3>${prod.nombre}</h3>
+          <div class="stars">${renderStars(prod.estrellas)}</div>
+          <div class="price">S/. ${prod.precio}</div>
+          <button onclick="comprar(${index})">🛒 Comprar</button>
+          <div class="comment-box">
+            <textarea placeholder="Escribe un comentario..."></textarea>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function comprar(index) {
+      const prod = productos[index];
+      const mensaje = `Hola, estoy interesado en comprar *${prod.nombre}* (S/. ${prod.precio}).`;
+      const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, "_blank");
+    }
+
+    // Renderiza todo
+    renderProducts();
+  </script>
+</body>
+</html>
