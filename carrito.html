@@ -55,7 +55,7 @@
   }
   .promo-msg { font-size: 1rem; color: #444; margin-top: 8px; }
     .promo-bar-container {
-    background: #eee; /* fondo gris base */
+    background: #eee; /* barra vacía (gris claro) */
     height: 14px;
     border-radius: 12px;
     overflow: hidden;
@@ -65,12 +65,15 @@
     }
 
     .promo-bar {
+    position: absolute; /* <-- para que se superponga bien */
+    top: 0;
+    left: 0;
     height: 100%;
     width: 0%; /* empieza vacía */
     background: linear-gradient(90deg, var(--vino), var(--vino-claro), var(--dorado));
     transition: width 0.6s ease, background 0.6s ease; /* transición suave de ancho y color */
-    border-radius: 12px;
     }
+
 
 
   .cart-item {
