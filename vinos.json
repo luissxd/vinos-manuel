@@ -6,7 +6,7 @@
     "img": "imagenes/vino-rose.jpeg",
     "estrellas": 4,
     "descripcion": "Un vino rosado refrescante, con notas dulces y suaves ideal para toda ocasión.",
-    "resena": "⭐⭐⭐⭐ - “Perfecto para compartir en reuniones, sabor ligero y agradable.”"
+    "resena": "“Perfecto para compartir en reuniones, sabor ligero y agradable.”"
   },
   {
     "nombre": "Vino de Durazno",
@@ -15,7 +15,7 @@
     "img": "imagenes/vino-durazno.jpeg",
     "estrellas": 5,
     "descripcion": "Vino artesanal macerado con durazno, dulce y afrutado, ideal para postres.",
-    "resena": "⭐⭐⭐⭐⭐ - “Un toque de fruta fresca, delicioso para acompañar postres.”"
+    "resena": " “Un toque de fruta fresca, delicioso para acompañar postres.”"
   },
   {
     "nombre": "Vino de Higo Macerado",
@@ -24,7 +24,7 @@
     "img": "imagenes/vino-higo.jpeg",
     "estrellas": 4,
     "descripcion": "Vino dulce con higos macerados, suave y equilibrado.",
-    "resena": "⭐⭐⭐⭐ - “Sabor único y especial para quienes buscan algo diferente.”"
+    "resena": "“Sabor único y especial para quienes buscan algo diferente.”"
   },
   {
     "nombre": "Vino Borgoña Semi Seco",
@@ -33,6 +33,6 @@
     "img": "imagenes/vino-borgona.jpeg",
     "estrellas": 5,
     "descripcion": "Vino Borgoña semi seco, perfecto para celebraciones y reuniones familiares.",
-    "resena": "⭐⭐⭐⭐⭐ - “Un clásico para compartir, calidad y sabor garantizado.”"
+    "resena": "“Un clásico para compartir, calidad y sabor garantizado.”"
   }
 ]
