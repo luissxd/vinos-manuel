@@ -217,6 +217,23 @@
     100% { background-position: 200%; }
   }
 
+
+    .promo-bar-container {
+    background: #eee; /* barra vacía */
+    height: 14px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    }
+
+    .promo-bar {
+    height: 100%;
+    width: 0%; /* empieza vacío */
+    background: linear-gradient(90deg, var(--vino), var(--vino-claro), var(--dorado));
+    transition: width 0.6s ease, background 0.6s ease; /* transición suave */
+    border-radius: 12px;
+    }
+
   /* TOAST flotante */
   .toast {
     position: fixed;
@@ -407,7 +424,7 @@
     if(subtotal >= metaDescuento10){
       promoMsg = "✅ ¡Felicidades! Has desbloqueado 10% de descuento 🎉";
     } else {
-      promoMsg = `🚚 Agrega S/. ${faltante.toFixed(2)} más para obtener 10% de descuento automático`;
+      promoMsg = `Agrega S/. ${faltante.toFixed(2)} más para obtener 10% de descuento`;
     }
 
     summary.innerHTML = `
@@ -415,7 +432,8 @@
       <div class="promo-msg">${promoMsg}</div>
       <div class="promo-bar-container"><div class="promo-bar" id="promoBar"></div></div>
     `;
-    const progreso = Math.min((subtotal/metaDescuento10)*100, 100);
+    let progreso = Math.min((subtotal/metaDescuento10)*100, 100);
+    if(progreso > 0 && progreso < 5) progreso = 5; // mínimo visible
 
     // Cambia el ancho con un pequeño delay para la animación
     setTimeout(() => {
