@@ -46,7 +46,7 @@
     .product {
       background:#fff; border-radius:var(--radius); box-shadow:var(--sombra); overflow:hidden;
       display:flex; flex-direction:column;
-      opacity:0; transform:translateY(20px); /* animación inicial */
+      opacity:0; transform:translateY(20px);
       transition:opacity 0.6s ease, transform 0.6s ease;
     }
     .product.show { opacity:1; transform:translateY(0); }
@@ -62,26 +62,31 @@
     .add-cart-btn:hover { background:#a52a2a; }
 
     /* FLOATING ICONS */
-    .whatsapp-float {
-      position:fixed; bottom:20px; left:20px;
-      background:#25D366; color:white;
-      border-radius:50%; width:55px; height:55px;
+    .whatsapp-float, .cart-float {
+      position:fixed; bottom:20px;
+      width:65px; height:65px;
       display:flex; justify-content:center; align-items:center;
-      font-size:28px; text-decoration:none; box-shadow:var(--sombra);
+      font-size:30px; text-decoration:none; color:white; border-radius:50%;
+      box-shadow:0 4px 15px rgba(0,0,0,0.2);
+      transition:transform 0.3s ease, box-shadow 0.3s ease;
+      z-index:999;
     }
-    .cart-float {
-      position:fixed; bottom:20px; right:20px;
-      background:var(--color-primario); color:white;
-      border-radius:50%; width:70px; height:70px;
-      display:flex; justify-content:center; align-items:center;
-      font-size:30px; cursor:pointer; box-shadow:var(--sombra); flex-direction:column;
+    .whatsapp-float { left:20px; background:#25D366; }
+    .cart-float { right:20px; background:var(--color-primario); flex-direction:column; font-size:28px; }
+    .whatsapp-float:hover, .cart-float:hover { transform:scale(1.1); box-shadow:0 6px 20px rgba(0,0,0,0.3); }
+    .cart-info { font-size:12px; text-align:center; margin-top:3px; }
+    .cart-total { font-size:12px; font-weight:bold; }
+
+    /* TOOLTIP */
+    .whatsapp-float::after {
+      content:"Chatea con nosotros";
+      position:absolute;
+      bottom:75px; left:50%; transform:translateX(-50%);
+      background:#25D366; color:white; padding:5px 10px; border-radius:8px;
+      font-size:12px; opacity:0; transition:0.3s;
+      white-space:nowrap;
     }
-    .cart-info {
-      font-size:12px; text-align:center; margin-top:3px;
-    }
-    .cart-total {
-      font-size:12px; font-weight:bold;
-    }
+    .whatsapp-float:hover::after { opacity:1; }
 
     /* TOAST */
     .toast {
@@ -135,7 +140,6 @@
   <div class="container" id="product-list"></div>
 
   <!-- FLOATING ICONS -->
-  <a href="https://wa.me/51999999999" target="_blank" class="whatsapp-float">💬</a>
   <div class="cart-float" onclick="window.location='carrito.html'">
     🛒
     <div class="cart-info">
@@ -143,6 +147,10 @@
       <div class="cart-total" id="cartTotalFloat">S/.0</div>
     </div>
   </div>
+
+  <!-- WHATSAPP FLOTANTE -->
+  <a href="https://wa.me/51999999999?text=Hola,%20estoy%20interesado%20en%20sus%20vinos%20premium%20🍷" 
+     target="_blank" class="whatsapp-float" title="Chatea por WhatsApp">💬</a>
 
   <!-- TOAST -->
   <div class="toast" id="toast">Producto añadido!</div>

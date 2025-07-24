@@ -11,13 +11,7 @@
       --sombra: 0 4px 15px rgba(0,0,0,0.1);
       --radius: 12px;
     }
-    body {
-      font-family: "Segoe UI", sans-serif;
-      margin:0;
-      padding:0;
-      background:var(--color-fondo);
-      color:#333;
-    }
+    body { font-family:"Segoe UI",sans-serif; margin:0; background:var(--color-fondo); color:#333; }
 
     header {
       background:linear-gradient(135deg,var(--color-primario),#a52a2a);
@@ -45,43 +39,18 @@
       transition:opacity 0.4s ease, transform 0.4s ease;
     }
     .cart-item.show { opacity:1; transform:translateY(0); }
-    .cart-item span { font-size:1rem; }
-    .cart-total {
-      text-align:right;
-      font-size:1.2rem;
-      margin-top:15px;
-      font-weight:bold;
-    }
+    .cart-total { text-align:right; font-size:1.2rem; margin-top:15px; font-weight:bold; }
     button {
       background:var(--color-primario);
-      color:white;
-      border:none;
-      padding:10px 15px;
-      cursor:pointer;
-      border-radius:var(--radius);
-      margin-top:15px;
-      transition:background 0.3s;
+      color:white; border:none; padding:10px 15px; cursor:pointer;
+      border-radius:var(--radius); margin-top:15px; transition:background 0.3s;
     }
     button:hover { background:#a52a2a; }
-
-    .btn-eliminar {
-      background:#ff4444;
-      margin-left:10px;
-      padding:5px 8px;
-      font-size:0.85rem;
-    }
+    .btn-eliminar { background:#ff4444; margin-left:10px; padding:5px 8px; font-size:0.85rem; }
     .btn-eliminar:hover { background:#cc0000; }
 
-    .acciones {
-      display:flex;
-      justify-content:space-between;
-      margin-top:20px;
-    }
-    .acciones a {
-      text-decoration:none;
-      color:var(--color-primario);
-      font-weight:bold;
-    }
+    .acciones { display:flex; justify-content:space-between; margin-top:20px; }
+    .acciones a { text-decoration:none; color:var(--color-primario); font-weight:bold; }
 
     /* LOADER */
     #loader {
@@ -105,14 +74,35 @@
     }
     .toast.show { top:20px; opacity:1; }
 
-    footer {
-      text-align:center;
-      padding:15px;
-      background:white;
-      margin-top:30px;
-      font-size:0.9rem;
-      opacity:0.7;
+    /* WHATSAPP FLOAT */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #25D366;
+      color: white;
+      border-radius: 50%;
+      width: 65px;
+      height: 65px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 32px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 999;
     }
+    .whatsapp-float:hover { transform:scale(1.1); box-shadow:0 6px 20px rgba(0,0,0,0.3); }
+    .whatsapp-float::after {
+      content:"Chatea con nosotros";
+      position:absolute; bottom:75px; left:50%; transform:translateX(-50%);
+      background:#25D366; color:white; padding:5px 10px; border-radius:8px;
+      font-size:12px; opacity:0; transition:0.3s; white-space:nowrap;
+    }
+    .whatsapp-float:hover::after { opacity:1; }
+
+    footer { text-align:center; padding:15px; background:white; margin-top:30px; font-size:0.9rem; opacity:0.7; }
   </style>
 </head>
 <body>
@@ -120,16 +110,17 @@
   <div id="loader"><div class="spinner"></div></div>
 
   <!-- HEADER -->
-  <header>
-    <h1>🛒 Tu Carrito</h1>
-  </header>
+  <header><h1>🛒 Tu Carrito</h1></header>
 
   <!-- CARRITO -->
   <div class="cart-container" id="cartContainer"></div>
-
   <div class="acciones" style="max-width:700px; margin:0 auto; padding:0 20px;">
     <a href="index.html">⬅️ Seguir comprando</a>
   </div>
+
+  <!-- WHATSAPP FLOTANTE -->
+  <a href="https://wa.me/51999999999?text=Hola,%20quiero%20consultar%20sobre%20mi%20compra%20de%20vinos%20🍷"
+     target="_blank" class="whatsapp-float" title="Chatea por WhatsApp">💬</a>
 
   <!-- TOAST -->
   <div class="toast" id="toast">Actualización carrito</div>
@@ -139,12 +130,9 @@
   <script>
     const whatsappNumber = "51999999999";
 
-    // Loader
     function showLoader(show=true){
       document.getElementById("loader").style.display = show ? "flex" : "none";
     }
-
-    // Toast
     function showToast(msg){
       const toast = document.getElementById("toast");
       toast.textContent = msg;
@@ -152,7 +140,6 @@
       setTimeout(()=>toast.classList.remove("show"),2500);
     }
 
-    // Carrito
     function obtenerCarrito(){
       return JSON.parse(localStorage.getItem("carritoVinos") || "[]");
     }
@@ -160,7 +147,6 @@
       localStorage.setItem("carritoVinos", JSON.stringify(c));
     }
 
-    // Eliminar item
     function eliminarDelCarrito(index){
       let carrito = obtenerCarrito();
       carrito.splice(index,1);
@@ -169,7 +155,6 @@
       showToast("❌ Producto eliminado del carrito");
     }
 
-    // Finalizar compra
     function finalizarCompra(){
       const carrito = obtenerCarrito();
       if(!carrito.length){
@@ -186,7 +171,6 @@
       window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensaje)}`, "_blank");
     }
 
-    // Mostrar carrito
     function mostrarCarrito(){
       const container = document.getElementById("cartContainer");
       const carrito = obtenerCarrito();
@@ -209,12 +193,9 @@
           </span>
         `;
         container.appendChild(div);
-
-        // animar la aparición
-        setTimeout(()=>div.classList.add("show"), index * 100);
+        setTimeout(()=>div.classList.add("show"), index*100);
       });
 
-      // total y boton finalizar
       const totalDiv = document.createElement("div");
       totalDiv.classList.add("cart-total");
       totalDiv.textContent = `Total: S/. ${total}`;
@@ -226,13 +207,12 @@
       container.appendChild(btnFinalizar);
     }
 
-    // Inicializar
     window.addEventListener("load", ()=>{
       showLoader(true);
-      setTimeout(()=>{ // simular carga
+      setTimeout(()=>{
         mostrarCarrito();
         showLoader(false);
-      }, 600); // pequeño delay para mostrar loader
+      },600);
     });
   </script>
 </body>
