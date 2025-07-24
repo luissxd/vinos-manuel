@@ -1,0 +1,20 @@
+[
+  {
+    "nombre": "Vino Tinto Reserva",
+    "precio": 80,
+    "img": "https://images.unsplash.com/photo-1603399304283-3b620951cc52",
+    "estrellas": 4
+  },
+  {
+    "nombre": "Vino Blanco Chardonnay",
+    "precio": 65,
+    "img": "https://images.unsplash.com/photo-1605180832256-c16e1332ac83",
+    "estrellas": 5
+  },
+  {
+    "nombre": "Vino Rosado Dulce",
+    "precio": 50,
+    "img": "https://images.unsplash.com/photo-1598020125784-8028f0d5565b",
+    "estrellas": 3
+  }
+]

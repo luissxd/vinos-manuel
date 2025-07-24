@@ -52,15 +52,6 @@
     button:hover {
       background: #a52a2a;
     }
-    .comment-box {
-      margin-top: 10px;
-    }
-    textarea {
-      width: 100%;
-      border-radius: 5px;
-      padding: 5px;
-      resize: none;
-    }
   </style>
 </head>
 <body>
@@ -70,41 +61,22 @@
   </header>
 
   <div class="container" id="product-list">
-    <!-- Productos generados por JS -->
+    <!-- Se cargará dinámicamente -->
   </div>
 
   <script>
     // ✅ Configura tu número de WhatsApp
-    const whatsappNumber = "51999999999"; // Cambia por tu número con código país sin +
+    const whatsappNumber = "51999999999"; // Cambia por tu número con código país
 
-    // ✅ Lista de vinos
-    const productos = [
-      {
-        nombre: "Vino Tinto Reserva",
-        precio: 80,
-        img: "https://images.unsplash.com/photo-1603399304283-3b620951cc52",
-        estrellas: 4
-      },
-      {
-        nombre: "Vino Blanco Chardonnay",
-        precio: 65,
-        img: "https://images.unsplash.com/photo-1605180832256-c16e1332ac83",
-        estrellas: 5
-      },
-      {
-        nombre: "Vino Rosado Dulce",
-        precio: 50,
-        img: "https://images.unsplash.com/photo-1598020125784-8028f0d5565b",
-        estrellas: 3
-      }
-    ];
-
+    // Función para mostrar estrellas
     function renderStars(cantidad) {
       return "★".repeat(cantidad) + "☆".repeat(5 - cantidad);
     }
 
-    function renderProducts() {
+    // Función para crear las tarjetas
+    function renderProducts(productos) {
       const container = document.getElementById("product-list");
+      container.innerHTML = ""; // limpia antes
       productos.forEach((prod, index) => {
         const div = document.createElement("div");
         div.classList.add("product");
@@ -113,24 +85,24 @@
           <h3>${prod.nombre}</h3>
           <div class="stars">${renderStars(prod.estrellas)}</div>
           <div class="price">S/. ${prod.precio}</div>
-          <button onclick="comprar(${index})">🛒 Comprar</button>
-          <div class="comment-box">
-            <textarea placeholder="Escribe un comentario..."></textarea>
-          </div>
+          <button onclick="comprar('${prod.nombre}', ${prod.precio})">🛒 Comprar</button>
         `;
         container.appendChild(div);
       });
     }
 
-    function comprar(index) {
-      const prod = productos[index];
-      const mensaje = `Hola, estoy interesado en comprar *${prod.nombre}* (S/. ${prod.precio}).`;
+    // Cuando le den a comprar
+    function comprar(nombre, precio) {
+      const mensaje = `Hola, estoy interesado en comprar *${nombre}* (S/. ${precio}).`;
       const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensaje)}`;
       window.open(url, "_blank");
     }
 
-    // Renderiza todo
-    renderProducts();
+    // ✅ Cargar el JSON de vinos
+    fetch("vinos.json")
+      .then(response => response.json())
+      .then(data => renderProducts(data))
+      .catch(error => console.error("Error cargando vinos:", error));
   </script>
 </body>
 </html>
