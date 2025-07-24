@@ -54,27 +54,25 @@
     margin-bottom: 10px;
   }
   .promo-msg { font-size: 1rem; color: #444; margin-top: 8px; }
+
+    /* Contenedor de la barra (fondo vacío gris claro) */
     .promo-bar-container {
-    background: #eee; /* barra vacía (gris claro) */
+    background: #eee; /* gris claro como base */
     height: 14px;
     border-radius: 12px;
     overflow: hidden;
     margin-top: 10px;
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
-    position: relative;
     }
 
+    /* La barra real que se anima encima */
     .promo-bar {
-    position: absolute; /* <-- para que se superponga bien */
-    top: 0;
-    left: 0;
     height: 100%;
     width: 0%; /* empieza vacía */
     background: linear-gradient(90deg, var(--vino), var(--vino-claro), var(--dorado));
-    transition: width 0.6s ease, background 0.6s ease; /* transición suave de ancho y color */
+    transition: width 0.6s ease, background 0.6s ease; /* suaviza tanto ancho como color */
+    border-radius: 12px; /* coincide con el contenedor */
     }
-
-
 
   .cart-item {
     display: grid;
@@ -409,35 +407,44 @@
     const cantidadItems = carrito.reduce((sum, it)=>sum+it.cantidad,0);
 
     // Progreso para meta de 10% descuento
+    // ✅ Calcular cuánto falta para el descuento
     let faltante = metaDescuento10 - subtotal;
     let promoMsg = "";
 
-    if(subtotal >= metaDescuento10){
-      promoMsg = "✅ ¡Felicidades! Has desbloqueado 10% de descuento 🎉";
+    // ✅ Mensaje dinámico
+    if (subtotal >= metaDescuento10) {
+    promoMsg = "✅ ¡Felicidades! Has desbloqueado 10% de descuento 🎉";
     } else {
-      promoMsg = `Agrega S/. ${faltante.toFixed(2)} más para obtener 10% de descuento`;
+    promoMsg = `Agrega S/. ${faltante.toFixed(2)} más para obtener 10% de descuento`;
     }
 
+    // ✅ Actualizar el resumen con NUEVO HTML
     summary.innerHTML = `
-      <div class="cart-counter">Tienes ${cantidadItems} ${cantidadItems===1?'vino':'vinos'} en el carrito</div>
-      <div class="promo-msg">${promoMsg}</div>
-      <div class="promo-bar-container"><div class="promo-bar" id="promoBar"></div></div>
+    <div class="cart-counter">Tienes ${cantidadItems} ${cantidadItems === 1 ? 'vino' : 'vinos'} en el carrito</div>
+    <div class="promo-msg">${promoMsg}</div>
+    <div class="promo-bar-container"><div class="promo-bar" id="promoBar"></div></div>
     `;
-    let progreso = Math.min((subtotal/metaDescuento10)*100, 100);
-    if(progreso > 0 && progreso < 5) progreso = 5; // mínimo visible
 
-    // Cambia el ancho con un pequeño delay para la animación
+    // ✅ IMPORTANTE: Obtener la referencia del nuevo promoBar recién creado
+    let promoBarElement = document.getElementById("promoBar");
+
+    // ✅ Calcular porcentaje de progreso
+    let progreso = Math.min((subtotal / metaDescuento10) * 100, 100);
+    // Forzar que al menos se vea algo si hay productos
+    if (progreso > 0 && progreso < 5) progreso = 5;
+
+    // ✅ Animar después de 100ms
     setTimeout(() => {
-    promoBar.style.width = progreso + "%";
+    promoBarElement.style.width = progreso + "%";
 
-    // Si alcanzó o superó la meta, cambia color a verde, sino queda en vino
     if (subtotal >= metaDescuento10) {
-        promoBar.style.background = "linear-gradient(90deg, #28a745, #4cd964)";
+        // Verde si alcanzó la meta
+        promoBarElement.style.background = "linear-gradient(90deg, #28a745, #4cd964)";
     } else {
-        promoBar.style.background = "linear-gradient(90deg, var(--vino), var(--vino-claro), var(--dorado))";
+        // Colores vino si aún no llega
+        promoBarElement.style.background = "linear-gradient(90deg, var(--vino), var(--vino-claro), var(--dorado))";
     }
     }, 100);
-
 
     carrito.forEach((item, index)=>{
       let lineTotal = item.precioUnitario * item.cantidad;
