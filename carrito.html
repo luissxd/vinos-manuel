@@ -23,24 +23,15 @@
     color: #333;
   }
 
-  /* HEADER */
   header {
     background: linear-gradient(135deg, var(--vino), var(--vino-claro));
     padding: 30px 15px;
     text-align: center;
     color: #fff;
   }
-  header h1 {
-    margin: 0;
-    font-size: 2.3rem;
-  }
-  header p {
-    margin: 5px 0 0;
-    opacity: 0.9;
-    font-size: 1.05rem;
-  }
+  header h1 { margin: 0; font-size: 2.3rem; }
+  header p { margin: 5px 0 0; opacity: 0.9; font-size: 1.05rem; }
 
-  /* CARRITO CONTAINER */
   .cart-container {
     max-width: 900px;
     margin: 30px auto;
@@ -50,29 +41,19 @@
     box-shadow: 0 6px 18px rgba(128,0,32,0.12);
     animation: fadeIn 0.5s ease;
   }
-
-  /* ANIMACIÓN ENTRADA */
   @keyframes fadeIn {
     from {opacity: 0; transform: translateY(20px);}
     to {opacity: 1; transform: translateY(0);}
   }
 
-  /* CONTADOR Y PROMO */
-  .cart-summary {
-    text-align: center;
-    margin-bottom: 25px;
-  }
+  .cart-summary { text-align: center; margin-bottom: 25px; }
   .cart-counter {
     font-size: 1.2rem;
     font-weight: bold;
     color: var(--vino);
     margin-bottom: 10px;
   }
-  .promo-msg {
-    font-size: 1rem;
-    color: #444;
-    margin-top: 8px;
-  }
+  .promo-msg { font-size: 1rem; color: #444; margin-top: 8px; }
   .promo-bar-container {
     background: #eee;
     height: 14px;
@@ -88,7 +69,6 @@
     transition: width 0.6s ease;
   }
 
-  /* ITEM CARRITO */
   .cart-item {
     display: grid;
     grid-template-columns: 90px 1fr auto;
@@ -102,10 +82,7 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     animation: fadeIn 0.4s ease;
   }
-  .cart-item:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 12px rgba(128,0,32,0.1);
-  }
+  .cart-item:hover { transform: scale(1.02); box-shadow: 0 4px 12px rgba(128,0,32,0.1); }
   .cart-item img {
     width: 80px; height: 100px;
     object-fit: contain;
@@ -113,21 +90,24 @@
     border-radius: 8px;
     background: #fff;
   }
-  .cart-item h3 {
-    margin: 0 0 5px 0;
-    font-size: 1.1rem;
-    color: var(--vino);
+  .cart-item h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: var(--vino); }
+  .cart-item .mini-desc { font-size: 0.9rem; color: #666; font-style: italic; }
+  .cart-item .price { font-weight: bold; color: var(--vino-claro); font-size: 1rem; }
+  
+  .quantity-controls {
+    display:flex; align-items:center; gap:6px; margin-top:6px;
   }
-  .cart-item .price {
-    font-weight: bold;
-    color: var(--vino-claro);
-    font-size: 1.05rem;
+  .quantity-controls button{
+    background:var(--vino);
+    color:white;
+    border:none;
+    width:28px;height:28px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
   }
-  .cart-item .mini-desc {
-    font-size: 0.9rem;
-    color: #666;
-    font-style: italic;
-  }
+  .quantity-controls span{ font-size:1rem; min-width:24px; text-align:center; }
+
   .btn-eliminar {
     background: transparent;
     border: none;
@@ -136,11 +116,8 @@
     font-size: 1.2rem;
     transition: color 0.3s;
   }
-  .btn-eliminar:hover {
-    color: #ff4444;
-  }
+  .btn-eliminar:hover { color: #ff4444; }
 
-  /* TOTAL */
   .cart-total {
     text-align: right;
     font-size: 1.3rem;
@@ -149,7 +126,6 @@
     margin-top: 25px;
   }
 
-  /* CUPON */
   .coupon-box {
     text-align:center;
     margin-top:15px;
@@ -170,21 +146,20 @@
     cursor:pointer;
   }
 
-  /* BOTONES */
-  .btn-finalizar {
+  .btn-finalizar, .btn-vaciar {
     background: var(--vino);
     color: #fff;
     padding: 15px;
     border: none;
     border-radius: 12px;
-    font-size: 1.2rem;
-    margin-top: 20px;
+    font-size: 1.1rem;
+    margin-top: 15px;
     cursor: pointer;
     width: 100%;
     transition: background 0.3s, transform 0.2s ease;
     box-shadow: 0 4px 10px rgba(128,0,32,0.3);
   }
-  .btn-finalizar:hover {
+  .btn-finalizar:hover, .btn-vaciar:hover {
     background: var(--vino-claro);
     transform: scale(1.02);
   }
@@ -196,19 +171,10 @@
     font-weight: bold;
     transition: color 0.3s;
   }
-  .btn-volver:hover {
-    color: var(--dorado);
-  }
+  .btn-volver:hover { color: var(--dorado); }
 
-  /* EMPTY STATE */
-  .empty {
-    text-align: center;
-    font-size: 1.1rem;
-    color: #666;
-    padding: 20px;
-  }
+  .empty { text-align: center; font-size: 1.1rem; color: #666; padding: 20px; }
 
-  /* FOOTER */
   footer {
     text-align: center;
     padding: 25px;
@@ -216,42 +182,50 @@
     color: #fff;
     font-size: 0.95rem;
   }
-  footer img {
-    transition: transform 0.3s, filter 0.3s;
+
+  /* TOAST flotante */
+  .toast {
+    position: fixed;
+    top: 20px;
+    right: -300px;
+    background: var(--vino);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: all 0.5s ease;
+    z-index: 2000;
   }
-  footer img:hover {
-    transform: scale(1.2);
-    filter: drop-shadow(0 0 5px gold);
+  .toast.show {
+    right: 20px;
+    opacity: 1;
   }
 
 </style>
 </head>
 <body>
-  <!-- HEADER -->
   <header>
     <h1>🛒 Tu Carrito de Vinos</h1>
     <p>Revisa tus selecciones antes de finalizar</p>
   </header>
 
   <div class="cart-container">
-    <!-- Contador de productos y promo -->
     <div class="cart-summary" id="cartSummary">
       <div class="cart-counter">Tienes 0 vinos en el carrito</div>
       <div class="promo-msg">💡 ¡Agrega más para aprovechar promociones!</div>
       <div class="promo-bar-container"><div class="promo-bar" id="promoBar"></div></div>
     </div>
 
-    <!-- Items del carrito -->
     <div id="cartContainer"></div>
 
-    <!-- CUPON -->
     <div class="coupon-box">
       <input type="text" id="couponCode" placeholder="¿Tienes un cupón?">
       <button onclick="aplicarCupon()">Aplicar</button>
       <div id="couponMsg" style="margin-top:8px; font-size:0.9rem; color:#444;"></div>
     </div>
 
-    <!-- Total y botones -->
     <div id="cartTotalContainer"></div>
   </div>
 
@@ -259,146 +233,185 @@
     <a href="index.html" class="btn-volver">⬅️ Seguir comprando</a>
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <p>© 2025 Vinos Selectos | Experiencia Premium 🍷</p>
   </footer>
 
-  <script>
-    const whatsappNumber = "51986973753";
-    let cuponActivo = null;
-    let descuentoPorcentaje = 0;
+  <!-- Toast flotante -->
+  <div id="toast" class="toast"></div>
 
-    const cuponesDisponibles = {
-      "PERU": 20
-    };
+<script>
+  const whatsappNumber = "51986973753";
+  let cuponActivo = null;
+  let descuentoPorcentaje = 0;
+  const cuponesDisponibles = { "PERU": 20 };
 
-    function obtenerCarrito(){ 
-      return JSON.parse(localStorage.getItem("carritoVinos") || "[]"); 
+  function showToast(mensaje, color="") {
+    const toast = document.getElementById("toast");
+    toast.textContent = mensaje;
+    if(color) toast.style.background = color; else toast.style.background = "var(--vino)";
+    toast.classList.add("show");
+    setTimeout(()=> toast.classList.remove("show"), 3000);
+  }
+
+  function obtenerCarrito(){
+    return JSON.parse(localStorage.getItem("carritoVinos") || "[]");
+  }
+  function guardarCarrito(c){
+    localStorage.setItem("carritoVinos", JSON.stringify(c));
+  }
+
+  function vaciarCarrito(){
+    localStorage.removeItem("carritoVinos");
+    showToast("🗑️ Carrito vaciado");
+    mostrarCarrito();
+  }
+
+  function aplicarCupon(){
+    const code = document.getElementById("couponCode").value.trim().toUpperCase();
+    const msg = document.getElementById("couponMsg");
+    if(cuponesDisponibles[code] !== undefined){
+      cuponActivo = code;
+      descuentoPorcentaje = cuponesDisponibles[code];
+      msg.textContent = `✅ Cupón aplicado: ${descuentoPorcentaje}% de descuento`;
+      msg.style.color = "green";
+      showToast("🎉 Cupón aplicado correctamente");
+    } else {
+      cuponActivo = null;
+      descuentoPorcentaje = 0;
+      msg.textContent = "❌ Cupón inválido";
+      msg.style.color = "red";
+      showToast("⚠️ Cupón inválido", "#c0392b");
     }
-    function guardarCarrito(c){ 
-      localStorage.setItem("carritoVinos", JSON.stringify(c)); 
-    }
+    mostrarCarrito();
+  }
 
-    function aplicarCupon(){
-      const code = document.getElementById("couponCode").value.trim().toUpperCase();
-      const msg = document.getElementById("couponMsg");
+  function eliminarDelCarrito(index){
+    let carrito = obtenerCarrito();
+    showToast(`❌ ${carrito[index].nombre} eliminado`);
+    carrito.splice(index,1);
+    guardarCarrito(carrito);
+    mostrarCarrito();
+  }
 
-      if(cuponesDisponibles[code] !== undefined){
-        cuponActivo = code;
-        descuentoPorcentaje = cuponesDisponibles[code];
-        msg.textContent = `✅ Cupón aplicado: ${descuentoPorcentaje}% de descuento`;
-        msg.style.color = "green";
-      } else {
-        cuponActivo = null;
-        descuentoPorcentaje = 0;
-        msg.textContent = "❌ Cupón inválido";
-        msg.style.color = "red";
-      }
-      mostrarCarrito();
-    }
-
-    function eliminarDelCarrito(index){
-      let carrito = obtenerCarrito();
+  function cambiarCantidad(index, delta){
+    let carrito = obtenerCarrito();
+    carrito[index].cantidad += delta;
+    if(carrito[index].cantidad <= 0){
+      showToast(`❌ ${carrito[index].nombre} eliminado`);
       carrito.splice(index,1);
-      guardarCarrito(carrito);
-      mostrarCarrito();
+    }
+    guardarCarrito(carrito);
+    mostrarCarrito();
+  }
+
+  function finalizarCompra(subtotal, descuento, totalFinal){
+    const carrito = obtenerCarrito();
+    if(!carrito.length){
+      showToast("⚠️ Tu carrito está vacío");
+      return;
+    }
+    let mensaje = "🍷 *Pedido Vinos Selectos*\n\n";
+    carrito.forEach((item, i)=>{
+      let lineTotal = item.precio * item.cantidad;
+      mensaje += `${i+1}. *${item.nombre}* - ${item.cantidad} und x S/.${item.precio} = S/.${lineTotal.toFixed(2)}\n`;
+    });
+    mensaje += `\n📦 Subtotal: S/. ${subtotal.toFixed(2)}\n`;
+    if(descuento > 0){
+      mensaje += `🎟️ Descuento (${descuentoPorcentaje}% - Cupón *${cuponActivo}*): -S/. ${descuento.toFixed(2)}\n`;
+    }
+    mensaje += `💳 *Total a pagar: S/. ${totalFinal.toFixed(2)}*\n\n✅ Envíame este mensaje para confirmar tu pedido.`;
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensaje)}`, "_blank");
+  }
+
+  function mostrarCarrito(){
+    const container = document.getElementById("cartContainer");
+    const totalContainer = document.getElementById("cartTotalContainer");
+    const summary = document.getElementById("cartSummary");
+    const promoBar = document.getElementById("promoBar");
+
+    let carrito = obtenerCarrito();
+    container.innerHTML = "";
+    totalContainer.innerHTML = "";
+
+    if(!carrito.length){
+      summary.innerHTML = `<div class="cart-counter">🛍️ Carrito vacío</div>
+      <div class="promo-msg">Agrega vinos para ver promociones</div>
+      <div class="promo-bar-container"><div class="promo-bar"></div></div>`;
+      container.innerHTML = `<div class="empty">No tienes productos en el carrito</div>`;
+      return;
     }
 
-    function finalizarCompra(subtotal, descuento, totalFinal){
-      const carrito = obtenerCarrito();
-      if(!carrito.length){ 
-        alert("Tu carrito está vacío 😅"); 
-        return; 
-      }
+    // Calcular subtotal con cantidades
+    let subtotal = 0;
+    carrito.forEach(item=>{
+      if(!item.cantidad) item.cantidad = 1;
+      subtotal += item.precio * item.cantidad;
+    });
+    const cantidadItems = carrito.reduce((sum, it)=>sum+it.cantidad,0);
+    const faltante = 100 - subtotal;
+    const porcentajePromo = Math.min((subtotal/100)*100, 100);
 
-      let mensaje = "🍷 *Pedido Vinos Selectos*\n\n";
-      carrito.forEach((item, i)=>{
-        mensaje += `${i+1}. *${item.nombre}*\n   ${item.descripcion || ""}\n   Precio: S/. ${item.precio}\n\n`;
-      });
+    let promoMsg = (subtotal >= 100) 
+      ? "✅ ¡Felicidades! Tienes envío gratis 🎉" 
+      : `🚚 Agrega S/. ${faltante.toFixed(2)} más para envío gratis`;
 
-      mensaje += `📦 Subtotal: S/. ${subtotal.toFixed(2)}\n`;
-      if(descuento > 0){
-        mensaje += `🎟️ Descuento (${descuentoPorcentaje}% - Cupón *${cuponActivo}*): -S/. ${descuento.toFixed(2)}\n`;
-      }
-      mensaje += `💳 *Total a pagar: S/. ${totalFinal.toFixed(2)}*\n\n`;
-      mensaje += `✅ Envíame este mensaje para confirmar tu pedido.`;
+    summary.innerHTML = `
+      <div class="cart-counter">Tienes ${cantidadItems} ${cantidadItems===1?'vino':'vinos'} en el carrito</div>
+      <div class="promo-msg">${promoMsg}</div>
+      <div class="promo-bar-container"><div class="promo-bar" id="promoBar"></div></div>
+    `;
+    setTimeout(()=> promoBar.style.width = porcentajePromo + "%", 100);
 
-      window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensaje)}`, "_blank");
-    }
-
-    function mostrarCarrito(){
-      const container = document.getElementById("cartContainer");
-      const totalContainer = document.getElementById("cartTotalContainer");
-      const summary = document.getElementById("cartSummary");
-      const promoBar = document.getElementById("promoBar");
-
-      const carrito = obtenerCarrito();
-      container.innerHTML = "";
-      totalContainer.innerHTML = "";
-
-      if(!carrito.length){
-        summary.innerHTML = `<div class="cart-counter">🛍️ Carrito vacío</div>
-        <div class="promo-msg">Agrega vinos para ver promociones</div>
-        <div class="promo-bar-container"><div class="promo-bar"></div></div>`;
-        container.innerHTML = `<div class="empty">No tienes productos en el carrito</div>`;
-        return;
-      }
-
-      // Subtotal
-      let subtotal = 0;
-      carrito.forEach(item=> subtotal += item.precio);
-      const cantidad = carrito.length;
-      const faltante = 100 - subtotal;
-      const porcentajePromo = Math.min((subtotal/100)*100, 100);
-
-      let promoMsg = (subtotal >= 100) 
-        ? "✅ ¡Felicidades! Tienes envío gratis 🎉" 
-        : `🚚 Agrega S/. ${faltante} más para envío gratis`;
-
-      summary.innerHTML = `
-        <div class="cart-counter">Tienes ${cantidad} ${cantidad===1?'vino':'vinos'} en el carrito</div>
-        <div class="promo-msg">${promoMsg}</div>
-        <div class="promo-bar-container"><div class="promo-bar" id="promoBar"></div></div>
-      `;
-      setTimeout(()=> promoBar.style.width = porcentajePromo + "%", 100);
-
-      carrito.forEach((item, index)=>{
-        const div = document.createElement("div");
-        div.classList.add("cart-item");
-        div.innerHTML = `
-          <img src="${item.img}" alt="${item.nombre}">
-          <div>
-            <h3>${item.nombre}</h3>
-            <div class="mini-desc">${item.descripcion || 'Sin descripción'}</div>
-            <div class="price">S/. ${item.precio}</div>
+    carrito.forEach((item, index)=>{
+      let lineTotal = item.precio * item.cantidad;
+      const div = document.createElement("div");
+      div.classList.add("cart-item");
+      div.innerHTML = `
+        <img src="${item.img}" alt="${item.nombre}">
+        <div>
+          <h3>${item.nombre}</h3>
+          <div class="mini-desc">${item.descripcion || 'Sin descripción'}</div>
+          <div class="price">S/. ${item.precio} c/u | Total: S/.${lineTotal.toFixed(2)}</div>
+          <div class="quantity-controls">
+            <button onclick="cambiarCantidad(${index}, -1)">-</button>
+            <span>${item.cantidad}</span>
+            <button onclick="cambiarCantidad(${index}, 1)">+</button>
           </div>
-          <button class="btn-eliminar" onclick="eliminarDelCarrito(${index})">❌</button>
-        `;
-        container.appendChild(div);
-      });
-
-      // Descuento
-      let descuento = cuponActivo ? (subtotal * descuentoPorcentaje) / 100 : 0;
-      let totalFinal = subtotal - descuento;
-
-      const totalDiv = document.createElement("div");
-      totalDiv.classList.add("cart-total");
-      totalDiv.innerHTML = `
-        <div>Subtotal: S/. ${subtotal.toFixed(2)}</div>
-        ${descuento > 0 ? `<div style="color:green;">Descuento (${descuentoPorcentaje}%): -S/. ${descuento.toFixed(2)}</div>` : ""}
-        <div style="font-size:1.5rem; margin-top:5px;">Total: <strong>S/. ${totalFinal.toFixed(2)}</strong></div>
+        </div>
+        <button class="btn-eliminar" onclick="eliminarDelCarrito(${index})">❌</button>
       `;
-      totalContainer.appendChild(totalDiv);
+      container.appendChild(div);
+    });
 
-      const btn = document.createElement("button");
-      btn.classList.add("btn-finalizar");
-      btn.textContent = "✅ Finalizar compra por WhatsApp";
-      btn.onclick = ()=> finalizarCompra(subtotal, descuento, totalFinal);
-      totalContainer.appendChild(btn);
-    }
+    let descuento = cuponActivo ? (subtotal * descuentoPorcentaje) / 100 : 0;
+    let totalFinal = subtotal - descuento;
 
-    window.addEventListener("load", mostrarCarrito);
-  </script>
+    const totalDiv = document.createElement("div");
+    totalDiv.classList.add("cart-total");
+    totalDiv.innerHTML = `
+      <div>Subtotal: S/. ${subtotal.toFixed(2)}</div>
+      ${descuento > 0 ? `<div style="color:green;">Descuento (${descuentoPorcentaje}%): -S/. ${descuento.toFixed(2)}</div>` : ""}
+      <div style="font-size:1.5rem; margin-top:5px;">Total: <strong>S/. ${totalFinal.toFixed(2)}</strong></div>
+    `;
+    totalContainer.appendChild(totalDiv);
+
+    // Botón finalizar compra
+    const btn = document.createElement("button");
+    btn.classList.add("btn-finalizar");
+    btn.textContent = "✅ Finalizar compra por WhatsApp";
+    btn.onclick = ()=> finalizarCompra(subtotal, descuento, totalFinal);
+    totalContainer.appendChild(btn);
+
+    // Botón vaciar carrito
+    const btnVaciar = document.createElement("button");
+    btnVaciar.classList.add("btn-vaciar");
+    btnVaciar.textContent = "🗑️ Vaciar carrito";
+    btnVaciar.onclick = vaciarCarrito;
+    totalContainer.appendChild(btnVaciar);
+  }
+
+  window.addEventListener("load", mostrarCarrito);
+</script>
 </body>
 </html>
