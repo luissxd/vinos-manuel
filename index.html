@@ -191,10 +191,16 @@
     footer {
       text-align: center;
       padding: 25px;
-      background: #fff;
-      margin-top: auto;
-      font-size: 0.9rem;
-      opacity: 0.8;
+      background: linear-gradient(135deg, #800020, #a52a2a); /* degradado vino */
+      color: #fff;
+      font-size: 0.95rem;
+    }
+    footer img {
+      transition: transform 0.3s, filter 0.3s;
+    }
+    footer img:hover {
+      transform: scale(1.2);
+      filter: drop-shadow(0 0 5px gold);
     }
 
     /* PROMO POPUP */
@@ -266,13 +272,20 @@
   </a>
 
   <!-- PROMO POPUP -->
-  <div class="promo-popup" id="promoPopup">🎉 Oferta especial: 2x1 en vinos Borgoña por tiempo limitado 🍷</div>
+  <div class="promo-popup" id="promoPopup">🎉 Oferta del mes: 20% de descuento en vinos Borgoña 🍷</div>
 
   <footer>
-    © 2025 Vinos Selectos | Síguenos en  
-    <a href="#" style="color:var(--vino);text-decoration:none;">Facebook</a> · 
-    <a href="#" style="color:var(--vino);text-decoration:none;">Instagram</a>  
-  </footer>
+  <p>© 2025 Vinos Selectos | Experiencia Premium 🍷</p>
+  <div style="margin-top:10px;">
+    <a href="https://www.tiktok.com/@j_manuelstar" target="_blank" title="TikTok">
+      <img src="imagenes/tk.png" alt="TikTok" style="width:28px;height:28px;margin:0 8px;">
+    </a>
+    <a href="https://www.facebook.com/juanmanuel.reategui" target="_blank" title="Facebook">
+      <img src="imagenes/fb.png" alt="Facebook" style="width:28px;height:28px;margin:0 8px;">
+    </a>
+  </div>
+</footer>
+
 
   <script>
     const whatsappNumber = "51901594350";
@@ -293,8 +306,8 @@
     // PROMO POPUP
     function showPromoPopup(){
       const promo = document.getElementById("promoPopup");
-      setTimeout(()=> promo.classList.add("show"), 3000);
-      setTimeout(()=> promo.classList.remove("show"), 10000);
+      setTimeout(()=> promo.classList.add("show"), 15000);
+      setTimeout(()=> promo.classList.remove("show"), 25000);
     }
 
     // Carrito localStorage
